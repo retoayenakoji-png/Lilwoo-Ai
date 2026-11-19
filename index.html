@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lilwoo AI</title>
+<style>
+body{margin:0;background:#0b0b12;color:white;font-family:Arial;display:flex;flex-direction:column;height:100vh}
+header{padding:20px;background:#171725;display:flex;align-items:center;gap:12px}
+.logo{background:#c5ad66;color:#111;padding:14px;border-radius:15px;font-weight:bold;font-size:22px}
+h2{margin:0}
+main{flex:1;overflow:auto;padding:15px}
+.msg{padding:14px;margin:12px 0;border-radius:15px;white-space:pre-wrap}
+.bot{background:#1c1c2b}
+.user{background:#7563b5;margin-left:25%}
+footer{padding:12px;background:#171725}
+form{display:flex;gap:8px}
+input{flex:1;padding:15px;border-radius:25px;border:1px solid #444;background:#222;color:white;font-size:16px}
+button{background:#c5ad66;border:0;border-radius:50%;width:50px;font-size:20px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">L</div>
+<div><h2>Lilwoo AI</h2><small>Your personal assistant</small></div>
+</header>
+<main id="chat">
+<div class="msg bot">Hello! I'm Lilwoo AI ✨ Your personal AI assistant. What can I help you with today?</div>
+</main>
+<footer>
+<form id="form">
+<input id="input" placeholder="Ask Lilwoo anything..." autocomplete="off">
+<button>➤</button>
+</form>
+</footer>
+<script>
+const chat=document.getElementById("chat");
+const form=document.getElementById("form");
+const input=document.getElementById("input");
+
+function message(text,who){
+let d=document.createElement("div");
+d.className="msg "+who;
+d.textContent=text;
+chat.appendChild(d);
+chat.scrollTop=chat.scrollHeight;
+}
+
+form.addEventListener("submit",function(e){
+e.preventDefault();
+let text=input.value.trim();
+if(!text)return;
+message(text,"user");
+input.value="";
+
+setTimeout(()=>{
+let reply="I'm Lilwoo AI! My interface is ready. I still need to be connected to an AI brain to answer questions intelligently.";
+
+if(/hello|hi|hey/i.test(text))reply="Hello! ✨ Welcome to Lilwoo AI. How can I help you?";
+else if(/your name/i.test(text))reply="My name is Lilwoo AI! 😊";
+else if(/help/i.test(text))reply="I can help with ideas, writing, learning and questions. My AI brain is still being connected!";
+else if(/who created you|who made you/i.test(text))reply="I was created as the Lilwoo AI personal assistant project!";
+message(reply,"bot");
+},400);
+});
+</script>
+</body>
+</html>
